@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요금표</title>
+</head>
+<style>
+    table{
+        margin: 0 auto;
+        text-align: center;
+        width: 30%;
+        font-family: sans-serif;
+        font-size: 20px;
+    }
+
+    thead{
+        background-color: lightgreen;
+    }
+</style>
+<body>
+    <table border="1">
+        <caption>요금표</caption>
+        <thead>
+            <tr>
+                <th>구분</th>
+                <th>요금</th>
+            </tr>
+        </thead>
+        <tr id="kids">
+            <td class="content">아동</td>
+            <td>무료</td>
+        </tr>
+        <tr id="teen">
+            <td class="content">청소년</td>
+            <td>2000원</td>
+        </tr>
+        <tr id="adult">
+            <td class="content">성인</td>
+            <td>5000원</td>
+        </tr>
+    </table>
+    <fieldset style="text-align:center; width:30%; margin:0 auto">
+        <legend>구분</legend>
+        <input type="text" id="choice">
+        <button onclick="confirm()">확인</button>
+    </fieldset>
+</body>
+<script>
+    var tempText;
+    var tempTd;
+
+   function confirm(){
+      var Elements = document.getElementsByClassName("content"); //프로퍼티를 사용해서 class 객체를 가져온다.
+      var value = document.getElementById("choice").value; // 해당 아이디를 가진 객체 가져오기
+      var check = false;
+      
+      if(tempText != undefined){ //undefined가 아니면 값 변경된것
+         tempTd.innerHTML = tempText; // undefined가 아니면 원상복구
+
+      }
+      
+      for(let i=0; i<Elements.length; i++){ // elements 길이만큼 반복
+         if(Elements[i].innerHTML == value){ // 안에 해당 아이디 choice를 가진 객체와 동일한 이름을 가지면
+            tempText = Elements[i].innerHTML; // tempText에 담아준다. 담긴 값은 위 if문을 만나면 원상복구 됌
+            tempTd = Elements[i]; // 객체 담기
+            tempTr = Elements[i].parentElement; // 부모 태그 가져오기
+            Elements[i].parentElement.style.backgroundColor = "red";
+            Elements[i].innerHTML = "★" + Elements[i].innerHTML; 
+            check = true;
+         }
+      }
+      if(!check){
+          alert("다시 시도해주세요");
+          history.go(0);
+      }
+   }
+</script>
+</html>
